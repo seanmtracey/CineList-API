@@ -26,6 +26,7 @@
   "author": "Sean M. Tracey",
   "license": "MIT",
   "devDependencies": {
+    "cheerio": "^0.20.0",
     "dotenv": "^2.0.0",
     "node-fetch": "^1.4.1"
   }

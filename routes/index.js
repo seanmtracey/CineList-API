@@ -1,5 +1,8 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
+const debug = require('debug')('api:lib:index');
 
 const locationInterface = require('../lib/locationInterface');
 const FaF = require('../lib/fafScraper');
@@ -11,16 +14,14 @@ router.get('/', function(req, res, next) {
 
 router.get('/search/cinemas/postcode/:postcode', function(req, res){
 	
-	const isValidPostCode = locationInterface.validate( req.params.postcode )
+	locationInterface.validate( req.params.postcode )
 		.then(isValid => {
 			
 			if(isValid){
 				// Check for cinemas;
-				console.log("Was valid");
+				debug("Was valid");
+				return req.params.postcode;
 				
-				
-				
-				res.end();
 			} else {
 				res.status(500);
 				res.json({
@@ -30,8 +31,19 @@ router.get('/search/cinemas/postcode/:postcode', function(req, res){
 			}
 				
 		})
+		.then(validatedPostcode => {
+			return FaF.getCinemas(validatedPostcode);
+		})
+		.then(cinemas => {
+			
+			res.send({
+				"postcode" : req.params.postcode,
+				cinemas
+			});
+	
+		})
 		.catch(err => {
-			console.log("An error occurred:", err);
+			debug("An error occurred:", err);
 			res.status(500);
 			res.json({
 				"status" : "ERR",
@@ -44,16 +56,57 @@ router.get('/search/cinemas/postcode/:postcode', function(req, res){
 
 router.get('/search/cinemas/coordinates/:latitude/:longitude', function(req, res){
 	
+	let resolvedPostcode = undefined;
+	
 	locationInterface.find(req.params.latitude, req.params.longitude)
-		.then(data => {
-			console.log(data);	
+		.then(postcode => {
+			resolvedPostcode = postcode;
+			return FaF.getCinemas(postcode);
+		})
+		.then(cinemas => {
+			res.send({
+				"postcode" : resolvedPostcode,
+				cinemas
+			});
 		})
 		.catch(err => {
-			console.log(err);
+			debug("An error occurred:", err);
+			res.status(500);
+			res.json({
+				"status" : "ERR",
+				"reason" : "Sorry, something went wrong."
+			});
 		})
 	;
 	
-	res.end();
+});
+
+router.get('/search/cinemas/location/:location', function(req, res){
+	
+	let resolvedPostcode = undefined;
+	
+	debug(req.params.location);
+	
+	locationInterface.search(req.params.location)
+		.then(postcode => {
+			resolvedPostcode = postcode;
+			return FaF.getCinemas(postcode);
+		})
+		.then(cinemas => {
+			res.send({
+				"postcode" : resolvedPostcode,
+				cinemas
+			});
+		})
+		.catch(err => {
+			debug("An error occurred:", err);
+			res.status(500);
+			res.json({
+				"status" : "ERR",
+				"reason" : "Sorry, something went wrong."
+			});
+		})
+	;
 	
 });
 
