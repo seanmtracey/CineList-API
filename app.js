@@ -8,6 +8,13 @@ var routes = require('./routes/index');
 
 var app = express();
 
+app.all('*', function(req, res, next) {
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET, POST');
+  res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
+  next();
+ });
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(bodyParser.json());
