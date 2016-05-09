@@ -1,0 +1,130 @@
+@charset "UTF-8";
+/* CSS Document */
+
+*{
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	/*-webkit-transform: translateZ(0);*/
+	/*-webkit-perspective: 1000;*/
+	/*-webkit-backface-visibility: hidden;*/
+}
+
+.inactive, [data-is-loading=false]{
+	display: none !important;
+}
+
+.dim{
+	opacity: 0.2;
+}
+
+.highlight{
+	opacity: 1 !important;
+}
+
+h1,h2,h3,h4,h5,h6{
+	font-family: "proxima-nova", 'Proxima Nova', sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+html{
+	height:100%;
+	width:100%;
+	background-color:white;
+	background-position:center 0px;
+	background-size:100%;
+
+}
+
+body{
+	font-family: "proxima-nova", 'Proxima Nova', Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	margin:0px;
+	background-attachment: scroll;
+	background-repeat: repeat-y;
+	width:100%;
+	height:100%;
+	box-sizing:border-box;
+
+	/*background-image: url("assets/images/logo_small.png");
+	background-size: 100px auto;
+	background-repeat: no-repeat;
+	background-position: 99% 99%;*/
+}
+
+form, input{
+	font-family: "proxima-nova", 'Proxima Nova', sans-serif;
+}
+
+input{
+	border: none;
+	background: none;
+	font-size: 15px;
+	max-width: 90px;
+	outline: none;
+	padding-right: 20px;
+	padding: 0px;
+}
+
+.informationBlock{
+	padding-left: 15px;
+	padding-top: 15px;
+}
+
+.title{
+	margin-bottom: 15px;
+}
+
+.endpointtype{
+	margin-bottom: 50px;
+	margin-left: 30px;
+}
+
+.endpointtype h1{
+	margin-bottom: 15px;
+}
+
+.ep{
+	margin-bottom: 40px;
+}
+
+.ep span{
+	font-size: 20px;
+}
+
+.ep span.method{
+	font-size: 12px;
+	background-color: white;
+	color: #989898;
+	padding: 3px 5px 2px;
+	border-radius: 3px;
+	font-weight: 100;
+	margin-right: 5px;
+	position: relative;
+	top: -1px;
+	border: solid 1px #989898;
+}
+
+.ep span.path{
+	margin-left: 10px;
+	font-weight: 600;
+}
+
+.ep p{
+	margin-top: 6px;
+	margin-left: 40px;
+}
+
+.ep pre{
+	max-width: 700px;
+	overflow: scroll;
+	border: 1px solid #A3A3A3;
+	border-radius: 3px;
+	padding: 5px;
+	margin-left: 40px;
+	font-size: 12px;
+	max-height: 200px;
+}
+
+.root{
+	color: #A3A3A3;
+}

@@ -1,0 +1,15 @@
+.windows #sidebar h1, .windows #sidebar h2, .windows #sidebar h3, .windows #sidebar h4, .windows #sidebar h5, .windows #sidebar h6{
+	font-weight: 400;
+}
+
+.windows #results ul li .times a.missed{
+	font-weight: 600;
+}
+
+.windows #results ul li .times a.missed{
+	font-weight: 400;
+}
+
+.windows #results ul li[data-all-missed="true"] {
+	opacity: 0.4;
+}
