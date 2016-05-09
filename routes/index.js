@@ -49,7 +49,7 @@ router.get('/search/cinemas/postcode/:postcode', function(req, res){
 	
 		})
 		.catch(err => {
-			debug("An error occurred:", err);
+			debug("An error occurred while searching for cinemas by postcode:", err);
 			res.status(500);
 			res.json({
 				"status" : "ERR",
@@ -76,7 +76,7 @@ router.get('/search/cinemas/coordinates/:latitude/:longitude', function(req, res
 			});
 		})
 		.catch(err => {
-			debug("An error occurred:", err);
+			debug("An error occurred while searching for cinemas by geocoordinates:", err);
 			res.status(500);
 			res.json({
 				"status" : "ERR",
@@ -105,7 +105,7 @@ router.get('/search/cinemas/location/:location', function(req, res){
 			});
 		})
 		.catch(err => {
-			debug("An error occurred:", err);
+			debug("An error occurred while searching for a cinema by location:", err);
 			res.status(500);
 			res.json({
 				"status" : "ERR",
@@ -138,7 +138,35 @@ router.get('/get/times/cinema/:venueID', function(req, res){
 			
 		})
 		.catch(err => {
-			debug("An error occurred:", err);
+			debug("An error occurred whilst getting times for a known cinema:", err);
+			res.status(500);
+			res.json({
+				"status" : "ERR",
+				"reason" : "Sorry, something went wrong."
+			});
+		})
+	;
+
+});
+
+router.get('/check/isPostcode/:postcode', function(req, res){
+
+	locationInterface.validate( req.params.postcode )
+		.then(isValid => {
+
+			if(isValid){
+				res.json({
+					validPostcode : true
+				});
+			} else {
+				res.json({
+					validPostcode : false
+				});
+			}
+
+		})
+		.catch(err => {
+			debug("An error occurred while validating a postcode:", err);
 			res.status(500);
 			res.json({
 				"status" : "ERR",
