@@ -12,6 +12,12 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+/////////////////////////////////////////////
+//
+// Endpoints for finding cinemas
+//
+/////////////////////////////////////////////
+
 router.get('/search/cinemas/postcode/:postcode', function(req, res){
 	
 	locationInterface.validate( req.params.postcode )
@@ -97,6 +103,39 @@ router.get('/search/cinemas/location/:location', function(req, res){
 				"postcode" : resolvedPostcode,
 				cinemas
 			});
+		})
+		.catch(err => {
+			debug("An error occurred:", err);
+			res.status(500);
+			res.json({
+				"status" : "ERR",
+				"reason" : "Sorry, something went wrong."
+			});
+		})
+	;
+	
+});
+
+/////////////////////////////////////////////
+//
+// Endpoints for getting cinema times
+//
+/////////////////////////////////////////////
+
+router.get('/get/times/cinema/:venueID', function(req, res){
+	
+	const venueID = req.params.venueID;
+	
+	FaF.getListings(venueID)
+		.then(listings => {
+			
+			debug(listings);
+			
+			res.json({
+				status : "ok",
+				listings
+			})
+			
 		})
 		.catch(err => {
 			debug("An error occurred:", err);

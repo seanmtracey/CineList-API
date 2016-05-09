@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>CineList API</title>
+<link rel="shortcut icon" href="favicon.png">
+<link rel="stylesheet" href="styles.css" type="text/css" />
+<link rel="stylesheet" href="windows.css" type="text/css" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta name="description" content="Cinema websites are rubbish. CineList makes it easy to get local cinema showtimes across the UK. This is the documentation for the CineList API, which you can use to write your own apps with film listings. The data is screenscraped from FindAnyFilm.co.uk and was based on the moviesAPI which you can find at http://moviesapi.herokuapp.com/">
+
+<meta property="og:title" content="CineList" />
+<meta property="og:description" content="Cinema websites are rubbish. CineList makes it easy to get local cinema showtimes across the UK." />
+<meta property="og:url" content="http://cinelist.co.uk/" />
+<meta property="og:image" content="http://cinelist.co.uk/icons/fb.png" />
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon-precomposed" href="/icons/default.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/icons/72.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/icons/114.png" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/icons/144.png" />
+
+<script src="//use.typekit.net/imt5yec.js"></script>
+<script>try{Typekit.load();}catch(e){}</script>
+
+</head>
+<body>
+
+<div class="informationBlock" id="endpoints">
+	<h1 class="title">ENDPOINTS</h1>
+	<div class="endpointtype">
+		<h1>/search</h1>
+
+		<div class="ep">
+			<span class="method">GET</span><span class="root">api.cinelist.co.uk</span><span class="path">/search/cinemas/postcode/:postcode</span>
+			<p>Get a list of cinemas within a certain distance of a UK postcode</p>
+
+			<pre class="result">
+// Request: http://api.cinelist.co.uk/search/cinemas/postcode/LU12HN
+
+// Result :
+{
+   "postcode":"LU12HN",
+   "cinemas":[
+      {
+         "distance":0.6,
+         "name":"Cineworld Luton, Luton, Luton",
+         "id":"7530"
+      },
+      {
+         "distance":8.6,
+         "name":"Knebworth House, Knebworth, Hertfordshire",
+         "id":"8053"
+      },
+      {
+         "distance":9.3,
+         "name":"Empire Hemel Hempstead, Hemel Hempstead, Hertfordshire",
+         "id":"7152"
+      },
+      {
+         "distance":9.4,
+         "name":"Alban Arena, St Albans, Hertfordshire",
+         "id":"3870"
+      },
+      {
+         "distance":9.6,
+         "name":"Cineworld Stevenage, Stevenage, Hertfordshire",
+         "id":"7544"
+      },
+      {
+         "distance":9.8,
+         "name":"The Odyssey, St Albans, Hertfordshire",
+         "id":"9105"
+      }
+   ]
+}</pre>
+
+		</div>
+
+		<div class="ep">
+			<span class="method">GET</span><span class="root">api.cinelist.co.uk</span><span class="path">/search/cinemas/location/:location</span>
+			<p>Get a list of cinemas by searching for a UK city, town or placename</p>
+
+			<pre class="result">
+// Request: http://api.cinelist.co.uk/search/cinemas/location/St.%20Albans
+
+// Result: 
+{
+   "status":"ok",
+   "postcode":"AL12JF",
+   "cinemas":[
+      {
+         "distance":0.7,
+         "name":"The Odyssey, St Albans, Hertfordshire",
+         "id":"9105"
+      },
+      {
+         "distance":0.9,
+         "name":"Alban Arena, St Albans, Hertfordshire",
+         "id":"3870"
+      },
+      {
+         "distance":1.7,
+         "name":"Highfield Park, St. Albans, Hertfordshire",
+         "id":"8844"
+      },
+      {
+         "distance":4.0,
+         "name":"Vue Watford, Watford, Hertfordshire",
+         "id":"6921"
+      },
+      {
+         "distance":4.9,
+         "name":"Empire Hemel Hempstead, Hemel Hempstead, Hertfordshire",
+         "id":"7152"
+      },
+      {
+         "distance":5.0,
+         "name":"Hatfield, Hatfield, Hertfordshire",
+         "id":"9258"
+      },
+      {
+         "distance":5.8,
+         "name":"Hatfield House, Hatfield, Hertfordshire",
+         "id":"8050"
+      },
+      {
+         "distance":6.2,
+         "name":"Palace Theatre, Watford, Hertfordshire",
+         "id":"5803"
+      },
+      {
+         "distance":8.9,
+         "name":"Barnet, Barnet, Greater London",
+         "id":"9233"
+      },
+      {
+         "distance":9.1,
+         "name":"Harrow Arts Centre, Pinner, Middlesex",
+         "id":"4731"
+      },
+      {
+         "distance":9.9,
+         "name":"Cineworld Luton, Luton, Luton",
+         "id":"7530"
+      }
+   ]
+}
+
+			</pre>	
+
+		</div>
+
+		<div class="ep">
+			<span class="method">GET</span><span class="root">api.cinelist.co.uk</span><span class="path">/search/cinemas/coordinates/:latitude/:longitude</span>
+			<p>Get a list of cinemas within a radius of a set of geo coordinates</p>
+			
+			<pre class="result">
+// Request: http://api.cinelist.co.uk/search/cinemas/coordinates/50.7200/-1.8800
+
+// Result : 
+
+{
+   "status":"ok",
+   "postcode":"BH26EG",
+   "cinemas":[
+      {
+         "distance":0.3,
+         "name":"ABC Bournemouth, Bournemouth, Dorset",
+         "id":"7174"
+      },
+      {
+         "distance":0.3,
+         "name":"Odeon Bournemouth, Bournemouth, Dorset",
+         "id":"7175"
+      },
+      {
+         "distance":0.3,
+         "name":"Bournemouth Pier, Bournemouth",
+         "id":"8841"
+      },
+      {
+         "distance":0.9,
+         "name":"Odeon Bournemouth (ABC), Bournemouth",
+         "id":"9342"
+      },
+      {
+         "distance":0.9,
+         "name":"Odeon Bournemouth (ODEON), Bournemouth",
+         "id":"9337"
+      },
+      {
+         "distance":3.6,
+         "name":"Empire Poole (Tower Park)",
+         "id":"8510"
+      },
+      {
+         "distance":3.6,
+         "name":"Empire Poole Tower Park, Poole, Dorset",
+         "id":"7147"
+      },
+      {
+         "distance":4.2,
+         "name":"Lighthouse, Poole's Centre For The Arts, Poole, Dorset",
+         "id":"2799"
+      },
+      {
+         "distance":4.6,
+         "name":"Regent, Christchurch, Dorset",
+         "id":"1999"
+      },
+      {
+         "distance":7.3,
+         "name":"Tivoli Theatre, Wimborne, Dorset",
+         "id":"1729"
+      }
+   ]
+}
+			</pre>
+
+		</div>
+
+	</div>
+
+	<div class="endpointtype">
+		<h1>/get</h1>
+
+		<div class="ep">
+			<span class="method">GET</span><span class="root">api.cinelist.co.uk</span><span class="path">/get/times/cinema/:venueID?day=&#60;INT&#62;</span>
+			<p>Get the film times for a cinema. The day query parameter is an offset to get times for a day other than today.</p>
+
+			<pre class="result">
+// Request: http://api.cinelist.co.uk/get/times/cinema/7530
+
+// Result : 
+{
+   "status":"ok",
+   "listings":[
+      {
+         "times":[
+            "10:20"
+         ],
+         "title":"Annie (2014)"
+      },
+      {
+         "times":[
+            "10:50",
+            "14:00",
+            "20:20"
+         ],
+         "title":"Avengers: Age Of Ultron (2015)"
+      },
+      {
+         "times":[
+            "17:10"
+         ],
+         "title":"Avengers: Age Of Ultron (2015)"
+      },
+      {
+         "times":[
+            "10:50",
+            "14:00",
+            "20:20"
+         ],
+         "title":"Avengers: Age Of Ultron (2015)"
+      },
+      {
+         "times":[
+            "10:00"
+         ],
+         "title":"Big Hero 6 (2014)"
+      },
+      {
+         "times":[
+            "10:00"
+         ],
+         "title":"Big Hero 6 - Movies For Juniors (2015)"
+      },
+      {
+         "times":[
+            "11:20"
+         ],
+         "title":"Cinderella (2015)"
+      },
+      {
+         "times":[
+            "14:10"
+         ],
+         "title":"Fast & Furious 7 (2014)"
+      },
+      {
+         "times":[
+            "13:00",
+            "15:20"
+         ],
+         "title":"Home (2014)"
+      },
+      {
+         "times":[
+            "12:45",
+            "15:30",
+            "17:20",
+            "18:20",
+            "20:10",
+            "21:10"
+         ],
+         "title":"Mad Max - Fury Road (2015)"
+      },
+      {
+         "times":[
+            "10:20",
+            "12:20",
+            "14:20",
+            "16:20"
+         ],
+         "title":"Moomins On The Riviera (2014)"
+      },
+      {
+         "times":[
+            "12:30",
+            "14:15",
+            "15:15",
+            "17:00",
+            "18:00",
+            "19:45",
+            "20:45"
+         ],
+         "title":"Pitch Perfect (2012)"
+      },
+      {
+         "times":[
+            "12:30",
+            "14:15",
+            "15:15",
+            "17:00",
+            "18:00",
+            "19:45",
+            "20:45"
+         ],
+         "title":"Pitch Perfect 2 (2015)"
+      },
+      {
+         "times":[
+            "11:10",
+            "13:40",
+            "16:15",
+            "17:40",
+            "18:50",
+            "20:15",
+            "21:15",
+            "22:30"
+         ],
+         "title":"Poltergeist (2015)"
+      },
+      {
+         "times":[
+            "10:10"
+         ],
+         "title":"Shaun The Sheep (2015)"
+      },
+      {
+         "times":[
+            "18:30",
+            "21:00"
+         ],
+         "title":"Spooks: The Greater Good (2014)"
+      },
+      {
+         "times":[
+            "13:20",
+            "16:30",
+            "19:40"
+         ],
+         "title":"Tanu Weds Manu Returns (2015)"
+      },
+      {
+         "times":[
+            "10:30"
+         ],
+         "title":"The SpongeBob Movie: Sponge Out Of Water (2014)"
+      },
+      {
+         "times":[
+            "10:30",
+            "11:30",
+            "13:30",
+            "14:30",
+            "16:30",
+            "17:30",
+            "19:30",
+            "20:30"
+         ],
+         "title":"Tomorrowland (2015)"
+      },
+      {
+         "times":[
+            "11:50"
+         ],
+         "title":"Two By Two (2015)"
+      },
+      {
+         "times":[
+            "22:40"
+         ],
+         "title":"Unfriended (2015)"
+      }
+   ],
+   "day":"1"
+}
+
+			</pre>
+
+		</div>
+
+	</div>
+
+</div>
+
+
+<script>
+  /*(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61305342-1', 'auto');
+  ga('send', 'pageview');*/
+
+</script>
+
+</body>
+</html>
