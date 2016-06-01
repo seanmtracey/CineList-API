@@ -1,8 +1,8 @@
 # CineList API
-A Node.js that provides the data that powers cinelist.co.uk.
+A Node.js that provides the data that powers [cinelist.co.uk](http://www.cinelist.co.uk).
 
-Location information is retreived using postcodes.io and OpenStreetMap's Nominatim service.
-Cinema information is parsed from FindAnyFilm.co.uk and returns Cinema listings based on a location.
+Location information is retreived using [postcodes.io](http://postcodes.io/) and [OpenStreetMap's Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim) service.
+Cinema information is parsed from [FindAnyFilm.com](http://www.findanyfilm.com/) and returns Cinema listings based on a location.
 
 ## Building + Running
 
@@ -16,9 +16,9 @@ Cinema information is parsed from FindAnyFilm.co.uk and returns Cinema listings 
 The CineList can provide two pieces of information. It can:
 
 1. List cinemas within a radius of a location in the UK
-⋅⋅* The location can be a postcode, place name or landmark. 
-⋅⋅* If you know the type of input (for example, a postcode) you can use the appropriate endpoint (`/search/cinemas/postcode/:postcode`) for a quicker result
-⋅⋅* Otherwise, you can use the `/search/cinemas/location/:location` endpoint which will do its best to figure out the type of input
+   * The location can be a postcode, place name or landmark. 
+   * If you know the type of input (for example, a postcode) you can use the appropriate endpoint (`/search/cinemas/postcode/:postcode`) for a quicker result
+   * Otherwise, you can use the `/search/cinemas/location/:location` endpoint which will do its best to figure out the type of input
 2. Find out the Cinema listings for a specific cinema
 
 The CineList API queries Nominatim and Postcodes API to figure out the location input and, ultimately, determine a postcode. Once a postcode has been obtained, it will scrape and parse findanyfilm.co.uk to get a list of cinemas for the location. Each cinema is assigned a unique ID by Find Any Film. Using this ID, you can further query the `/get` endpoint of the CineList API to get show listings for that cinema.
