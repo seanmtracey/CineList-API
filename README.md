@@ -4,6 +4,13 @@ A Node.js that provides the data that powers cinelist.co.uk.
 Location information is retreived using postcodes.io and OpenStreetMap's Nominatim service.
 Cinema information is parsed from FindAnyFilm.co.uk and returns Cinema listings based on a location.
 
+## Building + Running
+
+1. Clone this repo
+2. Enter the cloned directory with a CLI of your choice
+3. Run `npm i`
+4. Run `npm run start` to begin server
+
 ## ENDPOINTS
 
 ### /search
