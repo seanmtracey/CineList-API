@@ -17,6 +17,9 @@
     "node-fetch": "^1.4.1",    
     "serve-favicon": "~2.3.0"
   },
+  "engines" : {
+    "node" : ">6.0.0 < 7.0.0"
+  },
   "keywords": [
     "CineList",
     "Cinema",
