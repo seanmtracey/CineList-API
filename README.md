@@ -5,6 +5,9 @@ Location information is retreived using [postcodes.io](http://postcodes.io/) and
 Cinema information is parsed from [FindAnyFilm.com](http://www.findanyfilm.com/). 
 CineList returns cinema listings based on a information from these two sources.
 
+## Why? 
+Cinema listing websites suck, so I made CineList to fix that. CineList needed an API, so I built a service that could figure out locations, get nearby cinemas and get the times for films showing at those cinemas. 
+
 ## Building + Running
 
 1. Clone this repo
