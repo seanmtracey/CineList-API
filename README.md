@@ -8,9 +8,9 @@ Cinema information is parsed from FindAnyFilm.co.uk and returns Cinema listings 
 
 ### /search
 
-Get a list of cinemas within a certain distance of a UK postcode
 GET `/search/cinemas/postcode/:postcode`
 
+Get a list of cinemas within a certain distance of a UK postcode
 ```
 // Request: /search/cinemas/postcode/LU12HN
 
@@ -53,6 +53,7 @@ GET `/search/cinemas/postcode/:postcode`
 ```
 
 Get a list of cinemas by searching for a UK city, town or placename
+
 GET `/search/cinemas/location/:location`
 
 ```
@@ -122,8 +123,9 @@ GET `/search/cinemas/location/:location`
 }
 ```
 
-Get a list of cinemas within a radius of a set of geo coordinates
 GET `/search/cinemas/coordinates/:latitude/:longitude`
+
+Get a list of cinemas within a radius of a set of geo coordinates
 
 ```
 // Request: /search/cinemas/coordinates/50.7200/-1.8800
@@ -190,9 +192,9 @@ GET `/search/cinemas/coordinates/:latitude/:longitude`
 
 ### /get
 
-Get the film times for a cinema. The day query parameter is an offset to get times for a day other than today.
 GET `/get/times/cinema/:venueID?day=[INT]`
 
+Get the film times for a cinema. The day query parameter is an offset to get times for a day other than today.
 ```
 // Request: /get/times/cinema/7530
 
