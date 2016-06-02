@@ -3,7 +3,7 @@ A Nodejs app that provides the data that powers [cinelist.co.uk](http://www.cine
 
 Location information is retreived using [postcodes.io](http://postcodes.io/) and [OpenStreetMap's Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim) service.
 Cinema information is parsed from [FindAnyFilm.com](http://www.findanyfilm.com/). 
-CineList returns cinema listings based on information retrieved from these two sources.
+CineList returns cinema listings based on information retrieved from these three sources.
 
 ## Why? 
 Cinema listing websites suck, so I made CineList to fix that. CineList needed an API, so I built a service that could figure out locations, get nearby cinemas and get the times for films showing at those cinemas. 
