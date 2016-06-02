@@ -1,8 +1,12 @@
 # CineList API
-A Node.js that provides the data that powers [cinelist.co.uk](http://www.cinelist.co.uk).
+A Nodejs app that provides the data that powers [cinelist.co.uk](http://www.cinelist.co.uk).
 
 Location information is retreived using [postcodes.io](http://postcodes.io/) and [OpenStreetMap's Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim) service.
-Cinema information is parsed from [FindAnyFilm.com](http://www.findanyfilm.com/) and returns Cinema listings based on a location.
+Cinema information is parsed from [FindAnyFilm.com](http://www.findanyfilm.com/). 
+CineList returns cinema listings based on information retrieved from these three sources.
+
+## Why? 
+Cinema listing websites suck, so I made CineList to fix that. CineList needed an API, so I built a service that could figure out locations, get nearby cinemas and get the times for films showing at those cinemas. 
 
 ## Building + Running
 
@@ -11,9 +15,11 @@ Cinema information is parsed from [FindAnyFilm.com](http://www.findanyfilm.com/)
 3. Run `npm i`
 4. Run `npm run start` to begin server
 
+A server will now be listening on port 3000. You can configure this by including a .env file and including a `PORT` variable. For example `PORT=8080` will cause the server to bind to port 8080.
+
 ## Usage
 
-The CineList can provide two pieces of information. It can:
+The CineList API can provide two pieces of information. It can:
 
 1. List cinemas within a radius of a location in the UK
    * The location can be a postcode, place name or landmark. 
