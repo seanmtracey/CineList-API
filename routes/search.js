@@ -7,18 +7,7 @@ const debug = require('debug')('api:lib:index');
 const locationInterface = require('../lib/locationInterface');
 const FaF = require('../lib/fafScraper');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
-/////////////////////////////////////////////
-//
-// Endpoints for finding cinemas
-//
-/////////////////////////////////////////////
-
-router.get('/search/cinemas/postcode/:postcode', function(req, res){
+router.get('/cinemas/postcode/:postcode', function(req, res){
 	
 	locationInterface.validate( req.params.postcode )
 		.then(isValid => {
@@ -60,7 +49,7 @@ router.get('/search/cinemas/postcode/:postcode', function(req, res){
 	
 });
 
-router.get('/search/cinemas/coordinates/:latitude/:longitude', function(req, res){
+router.get('/cinemas/coordinates/:latitude/:longitude', function(req, res){
 	
 	let resolvedPostcode = undefined;
 	
@@ -87,7 +76,7 @@ router.get('/search/cinemas/coordinates/:latitude/:longitude', function(req, res
 	
 });
 
-router.get('/search/cinemas/location/:location', function(req, res){
+router.get('/cinemas/location/:location', function(req, res){
 	
 	let resolvedPostcode = undefined;
 	
@@ -106,67 +95,6 @@ router.get('/search/cinemas/location/:location', function(req, res){
 		})
 		.catch(err => {
 			debug("An error occurred while searching for a cinema by location:", err);
-			res.status(500);
-			res.json({
-				"status" : "ERR",
-				"reason" : "Sorry, something went wrong."
-			});
-		})
-	;
-	
-});
-
-/////////////////////////////////////////////
-//
-// Endpoints for getting cinema times
-//
-/////////////////////////////////////////////
-
-router.get('/get/times/cinema/:venueID', function(req, res){
-	
-	const venueID = req.params.venueID;
-	
-	FaF.getListings(venueID)
-		.then(listings => {
-			
-			debug(listings);
-			
-			res.json({
-				status : "ok",
-				listings
-			})
-			
-		})
-		.catch(err => {
-			debug("An error occurred whilst getting times for a known cinema:", err);
-			res.status(500);
-			res.json({
-				"status" : "ERR",
-				"reason" : "Sorry, something went wrong."
-			});
-		})
-	;
-
-});
-
-router.get('/check/isPostcode/:postcode', function(req, res){
-
-	locationInterface.validate( req.params.postcode )
-		.then(isValid => {
-
-			if(isValid){
-				res.json({
-					validPostcode : true
-				});
-			} else {
-				res.json({
-					validPostcode : false
-				});
-			}
-
-		})
-		.catch(err => {
-			debug("An error occurred while validating a postcode:", err);
 			res.status(500);
 			res.json({
 				"status" : "ERR",
