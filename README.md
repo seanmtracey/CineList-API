@@ -15,7 +15,7 @@ Cinema listing websites suck, so I made CineList to fix that. CineList needed an
 3. Run `npm i`
 4. Run `npm run start` to begin server
 
-A server will now be listening on port 3000. You can configure this by including a .env file and including a `PORT` variable. For example `PORT=8080` will cause the server to bind to port 8080.
+A server will now be listening on port 3000. You can configure this by including a .env file in the same folder as app.js and including a `PORT` variable. For example `PORT=8080` will cause the server to bind to port 8080.
 
 ## Usage
 
