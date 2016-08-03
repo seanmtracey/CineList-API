@@ -4,7 +4,7 @@
   "description": "The scraper and interface for the CineList app",
   "main": "app.js",
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "node --max_old_space_size=400 ./bin/www",
     "test": "echo 'Sorry, No Tests'"
   },
   "dependencies": {
