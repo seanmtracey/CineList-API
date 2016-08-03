@@ -10,8 +10,9 @@ const FaF = require('../lib/fafScraper');
 router.get('/times/cinema/:venueID', function(req, res){
 	
 	const venueID = req.params.venueID;
+	const dayOffset = req.query.day;
 	
-	FaF.getListings(venueID)
+	FaF.getListings(venueID, dayOffset)
 		.then(listings => {
 			
 			debug(listings);
