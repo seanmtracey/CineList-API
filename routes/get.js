@@ -24,15 +24,47 @@ router.get('/times/cinema/:venueID', function(req, res){
 			
 		})
 		.catch(err => {
-			debug("An error occurred whilst getting times for a known cinema:", err);
+			debug("An error occurred whilst getting times for a cinema:", err);
 			res.status(500);
 			res.json({
 				"status" : "ERR",
-				"reason" : "Sorry, something went wrong."
+				"reason" : err
 			});
 		})
 	;
 
+});
+
+router.get('/times/many/:venueIDs', function(req, res){
+
+	const venueIDs = req.params.venueIDs.split(',');
+	const dayOffset = req.query.day;
+
+	const times = venueIDs.map(venueID => {
+
+		return FaF.getListings(venueID, dayOffset)
+			.then(listings => {
+				return {
+					cinema : venueID,
+					listings
+				}
+			})
+			.catch(err => {
+				return null;
+			})
+		;
+
+	});
+
+	Promise.all(times)
+		.then(ts => {
+			res.json({
+				status : "ok",
+				results : ts
+			})
+		})
+	;
+	
 });
 
 module.exports = router;
