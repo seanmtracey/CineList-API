@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const debug = require('debug')('api:routes:check');
 
-const locationInterface = require('../lib/locationInterface');
+const locationInterface = require('../bin/lib/locationInterface');
 
 router.get('/isPostcode/:postcode', function(req, res){
 

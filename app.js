@@ -3,7 +3,7 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const preload = require('./lib/preload');
+const preload = require('./bin/lib/preload');
 
 const app = express();
 

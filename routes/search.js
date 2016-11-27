@@ -4,8 +4,8 @@ const express = require('express');
 const router = express.Router();
 const debug = require('debug')('api:routes:search');
 
-const locationInterface = require('../lib/locationInterface');
-const FaF = require('../lib/fafScraper');
+const locationInterface = require('../bin/lib/locationInterface');
+const FaF = require('../bin/lib/fafScraper');
 
 router.get('/cinemas/postcode/:postcode', function(req, res){
 	
