@@ -1,10 +1,11 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const preload = require('./lib/preload');
 
-var app = express();
+const app = express();
 
 app.all('*', function(req, res, next) {
   res.set('Access-Control-Allow-Origin', '*');
@@ -26,9 +27,11 @@ app.use('/check', require('./routes/check'));
 app.use('/get', require('./routes/get'));
 app.use('/search', require('./routes/search'));
 
+preload();
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
