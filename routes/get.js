@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const debug = require('debug')('api:lib:index');
+const debug = require('debug')('api:routes:get');
 
 const locationInterface = require('../lib/locationInterface');
 const FaF = require('../lib/fafScraper');
