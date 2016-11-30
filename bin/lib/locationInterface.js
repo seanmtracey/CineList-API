@@ -22,7 +22,7 @@ function validatePostcode (postcode){
 	const postCodeQuery = `${postCodeAPI}/${postcode}/validate`;
 	
 	const cachedVersion = cache.get(`validate-postcode:${postcode}`);
-	debug(`Is there a cached information about the postcode ${postcode}?`, cachedVersion !== undefined);
+	debug(`Is there cached information about the postcode ${postcode}?`, cachedVersion !== undefined);
 
 	if(cachedVersion){
 
@@ -93,7 +93,16 @@ function searchForLocation (location){
 	}
 	
 	const nominatimQuery = `${nominatimAPI}/search?q=${location}&countrycodes=gb&format=json&limit=10`;
-	
+
+	const cachedVersion = cache.get(`nominatim-search:${location}`);
+	debug(`Is there cached Nominatim information about the location ${location}?`, cachedVersion !== undefined);
+
+	if(cachedVersion){
+		const parsedCacheVersion = JSON.parse(cachedVersion);
+		debug(`Returning cached location information for ${location}`);
+		return Promise.resolve(parsedCacheVersion.data);
+	}
+
 	return fetch(nominatimQuery)
 		.then(res => res.json())
 		.then(data => {
@@ -101,7 +110,18 @@ function searchForLocation (location){
 			debug(data);
 
 			if(data.length > 0){
-				return getPostCodeForCoordinates(data[0].lat.substring(0, 5), data[0].lon.substring(0, 5));
+				return getPostCodeForCoordinates(data[0].lat.substring(0, 5), data[0].lon.substring(0, 5))
+					.then(data => {
+
+						cache.set(`nominatim-search:${location}`, JSON.stringify({
+							state : 'resolved',
+							data
+						}));
+
+						return data;
+
+					})
+				;
 			} else {
 				throw data;					
 			}
