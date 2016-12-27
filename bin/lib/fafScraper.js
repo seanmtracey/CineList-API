@@ -27,7 +27,7 @@ function getCinemasForPostcode(postcode, attempt){
 
 	const cachedVersion = cache.get(`cinemaLocations:${postcode}`);
 	debug(`Is there a cached list of cinemas for ${postcode}?`, cachedVersion !== undefined);
-
+	
 	if(cachedVersion){
 
 		const parsedCacheVersion = JSON.parse(cachedVersion);
@@ -98,7 +98,7 @@ function getListingForCinemaByID(id, day){
 	const cachedVersion = cache.get(`listings:${id}:${day}`);
 
 	debug(`Is there a cached version of ${id}?`, cachedVersion !== undefined);
-
+	debug(cachedVersion);
 	if(cachedVersion){
 
 		const parsedCacheVersion = JSON.parse(cachedVersion);
@@ -178,7 +178,7 @@ function getListingForCinemaByID(id, day){
 				listings
 			};
 
-			cache.set(`${id}:${day}`, JSON.stringify( listingsToCache ) );
+			cache.set(`listings:${id}:${day}`, JSON.stringify( listingsToCache ) );
 
 			return listings;
 
