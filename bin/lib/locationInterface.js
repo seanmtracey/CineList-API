@@ -65,9 +65,12 @@ function getPostCodeForCoordinates (latitude, longitude){
 	}
 	
 	const lat = latitude.substring(0, 9);
-	const lon = longitude.substring(0, 9);
-	
+	const lon = longitude.substring(0, 9);	
+	debug(`Getting post code for coordinates latitude: ${lat} longitude: ${lon}`);
+
 	const lookupQuery = `${postCodeAPI}/?lon=${lon}&lat=${lat}`;
+
+	debug(lookupQuery);
 
 	return fetch(lookupQuery)
 		.then(res => res.json())
@@ -110,7 +113,7 @@ function searchForLocation (location){
 			debug(data);
 
 			if(data.length > 0){
-				return getPostCodeForCoordinates(data[0].lat.substring(0, 5), data[0].lon.substring(0, 5))
+				return getPostCodeForCoordinates(data[0].lat, data[0].lon)
 					.then(data => {
 
 						cache.set(`nominatim-search:${location}`, JSON.stringify({
