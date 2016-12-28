@@ -23,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.static('documentation'));
 
+app.get('/__gtg', (req, res) => {res.end();});
 app.use('/check', require('./routes/check'));
 app.use('/get', require('./routes/get'));
 app.use('/search', require('./routes/search'));
