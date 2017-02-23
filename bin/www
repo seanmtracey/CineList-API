@@ -5,6 +5,7 @@
  */
 
 require('dotenv').config();
+global.Promise = require('bluebird');
 
 var app = require('../app');
 var debug = require('debug')('api:server');
