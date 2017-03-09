@@ -5,7 +5,7 @@ const places = require('./places');
 
 module.exports = function(){
 
-	if(process.env.HOSTNAME && process.env.PRELOAD){
+	if(process.env.PORT && process.env.PRELOAD){
 
 		let timeOffset = 0;
 		const increment = 1800;
@@ -14,7 +14,7 @@ module.exports = function(){
 
 			setTimeout(function(){
 				debug(`Caching results for ${place}`);
-				fetch(`${process.env.HOSTNAME}/search/cinemas/location/${place}`)
+				fetch(`http://localhost:${process.env.PORT}/search/cinemas/location/${place}`)
 					.then(res => res.json())
 					.then(data => {
 						debug(data);
