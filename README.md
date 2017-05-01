@@ -1,5 +1,5 @@
 # CineList API
-A Nodejs app that provides the data that powers [cinelist.co.uk](http://www.cinelist.co.uk).
+A Node.js app that provides the data that powers [cinelist.co.uk](http://www.cinelist.co.uk).
 
 Location information is retreived using [postcodes.io](http://postcodes.io/) and [OpenStreetMap's Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim) service.
 Cinema information is parsed from [FindAnyFilm.com](http://www.findanyfilm.com/). 
