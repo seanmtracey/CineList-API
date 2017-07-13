@@ -28,7 +28,9 @@ app.use('/check', require('./routes/check'));
 app.use('/get', require('./routes/get'));
 app.use('/search', require('./routes/search'));
 
-preload();
+if(process.env.PORT && process.env.PRELOAD){
+  preload();
+}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
