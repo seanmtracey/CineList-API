@@ -12,7 +12,7 @@ module.exports = function(){
 
 		setTimeout(function(){
 			debug(`Caching results for ${place}`);
-			fetch(`http://localhost:${process.env.PORT}/search/cinemas/location/${place}`)
+			fetch(`${process.env.HOSTNAME}/search/cinemas/location/${place}`)
 				.then(res => res.json())
 				.then(data => {
 					debug(data);
