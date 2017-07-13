@@ -5,28 +5,32 @@ const places = require('./places');
 
 module.exports = function(){
 
-	let timeOffset = 0;
-	const increment = 1800;
+	if(process.env.PORT && process.env.PRELOAD){
 
-	places.forEach(place => {
+		let timeOffset = 0;
+		const increment = 1800;
 
-		setTimeout(function(){
-			debug(`Caching results for ${place}`);
-			fetch(`${process.env.HOSTNAME}/search/cinemas/location/${place}`)
-				.then(res => res.json())
-				.then(data => {
-					debug(data);
-					data.cinemas.forEach(cinema => {
-						fetch(`${process.env.HOSTNAME}/get/times/cinema/${cinema.id}`)
-					});
+		places.forEach(place => {
 
-				})
-			;
+			setTimeout(function(){
+				debug(`Caching results for ${place}`);
+				fetch(`http://localhost:${process.env.PORT}/search/cinemas/location/${place}`)
+					.then(res => res.json())
+					.then(data => {
+						debug(data);
+						data.cinemas.forEach(cinema => {
+							fetch(`${process.env.HOSTNAME}/get/times/cinema/${cinema.id}`)
+						});
 
-		}, timeOffset);
+					})
+				;
 
-		timeOffset += increment;
+			}, timeOffset);
 
-	});
+			timeOffset += increment;
+
+		});
+		
+	}
 
 }
