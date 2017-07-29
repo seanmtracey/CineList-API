@@ -6,6 +6,9 @@ const LRU = require("lru-cache");
 
 const moment = require('moment');
 const cheerio = require('cheerio');
+
+const offsetToDatestamp = require('./day-offset-to-datestamp');
+
 const cache = LRU({
 	max: 500,
 	length: function (n, key) { return n * 2 + key.length },
@@ -133,8 +136,10 @@ function getListingForCinemaByID(id, day){
 		}));
 	}
 
-	const fafURL = `${fafAPI}/api/screenings/by_venue_id/venue_id/${id}/date_from/${day}`;
-	
+	const fafURL = `${fafAPI}/api/screenings/by_venue_id/venue_id/${id}/date_from/${offsetToDatestamp( day )}`;
+
+	debug(`fafURL >>>`, fafURL);
+
 	return fetch(fafURL)
 		.then(res => {
 			return res.json();
