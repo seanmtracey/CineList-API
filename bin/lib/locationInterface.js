@@ -6,7 +6,6 @@ const LRU = require("lru-cache");
 const postCodeAPI = 'http://api.postcodes.io/postcodes';
 const nominatimAPI = 'http://nominatim.openstreetmap.org';
 const cache = LRU({
-	max: 500,
 	length: function (n, key) { return n * 2 + key.length },
 	maxAge: (1000 * 60 * 60) * 24
 });
@@ -78,7 +77,7 @@ function getPostCodeForCoordinates (latitude, longitude){
 			
 			debug(data);
 			
-			if(data.result === ""){
+			if(data.result === "" || !data.result){
 				throw data;
 			} else {
 				return data.result[0].postcode.replace(' ', '');
