@@ -78,7 +78,7 @@ function getPostCodeForCoordinates (latitude, longitude){
 			
 			debug(data);
 			
-			if(data.result === ""){
+			if(data.result === "" || !data.result){
 				throw data;
 			} else {
 				return data.result[0].postcode.replace(' ', '');
