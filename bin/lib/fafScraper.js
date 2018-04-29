@@ -11,7 +11,6 @@ const offsetToDatestamp = require('./day-offset-to-datestamp');
 const halflife = require('./half-life');
 
 const cache = LRU({
-	max: 500,
 	length: function (n, key) { return n * 2 + key.length },
 	maxAge: halflife()
 });
