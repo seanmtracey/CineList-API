@@ -223,14 +223,14 @@
 
 	</div>
 
-	<div class="endpointtype">
-		<h1>/get</h1>
+    <div class="endpointtype">
+        <h1>/get</h1>
 
-		<div class="ep">
-			<span class="method">GET</span><span class="root">api.cinelist.co.uk</span><span class="path">/get/times/cinema/:venueID?day=&#60;INT&#62;</span>
-			<p>Get the film times for a cinema. The day query parameter is an offset to get times for a day other than today.</p>
+        <div class="ep">
+            <span class="method">GET</span><span class="root">api.cinelist.co.uk</span><span class="path">/get/times/cinema/:venueID?day=&#60;INT&#62;</span>
+            <p>Get the film times for a cinema. The day query parameter is an offset to get times for a day other than today.</p>
 
-			<pre class="result">
+            <pre class="result">
 // Request: http://api.cinelist.co.uk/get/times/cinema/7530
 
 // Result : 
@@ -411,9 +411,165 @@
 
 			</pre>
 
-		</div>
+        </div>
 
-	</div>
+        <div class="ep">
+            <span class="method">GET</span><span class="root">api.cinelist.co.uk</span><span class="path">/get/times/cinema/:venueIDs?day=&#60;INT&#62;</span>
+            <p>Get the film times for the provided list of cinemas. The list of cinemas should be separated by commas. The day query parameter is an offset to get times for a day other than today.</p>
+
+            <pre class="result">
+// Request: http://www.cinelist.co.uk/get/times/many/10681,7517
+
+//Result:
+{
+	"status": "ok",
+	"results": [{
+		"cinema": "10681",
+		"listings": [{
+			"title": "On Chesil Beach",
+			"times": ["11:00"]
+		},
+		{
+			"title": "Incredibles 2",
+			"times": ["11:00",
+			"12:05",
+			"12:30",
+			"14:00",
+			"15:00",
+			"17:00",
+			"18:00",
+			"18:40",
+			"20:50",
+			"21:30"]
+		},
+		{
+			"title": "Mamma Mia! Here We Go Again",
+			"times": ["11:40",
+			"14:40",
+			"18:50",
+			"19:50",
+			"20:30",
+			"20:55",
+			"21:40"]
+		},
+		{
+			"title": "Patrick",
+			"times": ["10:00"]
+		},
+		{
+			"title": "Show Dogs",
+			"times": ["10:15"]
+		},
+		{
+			"title": "Ant-Man & The Wasp",
+			"times": ["10:05",
+			"11:30",
+			"12:45",
+			"13:30",
+			"14:15",
+			"15:30",
+			"16:15",
+			"17:00",
+			"18:15",
+			"19:00",
+			"19:45",
+			"20:30",
+			"21:15",
+			"21:45"]
+		},
+		{
+			"title": "Hotel Transylvania 3",
+			"times": ["09:50",
+			"10:50",
+			"12:20",
+			"13:20",
+			"14:50",
+			"15:50",
+			"18:20"]
+		},
+		{
+			"title": "Teen Titans Go! To The Movies",
+			"times": ["09:45",
+			"12:00",
+			"14:15",
+			"16:30"]
+		},
+		{
+			"title": "Mission: Impossible - Fallout",
+			"times": ["11:05",
+			"14:20",
+			"15:20",
+			"17:10",
+			"17:40",
+			"20:00",
+			"21:00"]
+		},
+		{
+			"title": "Fanney Khan",
+			"times": ["17:20"]
+		}]
+	},
+	{
+		"cinema": "7517",
+		"listings": [{
+			"title": "Incredibles 2",
+			"times": ["10:20",
+			"11:20",
+			"13:10",
+			"14:10",
+			"17:10",
+			"20:10"]
+		},
+		{
+			"title": "Mamma Mia! Here We Go Again",
+			"times": ["10:50",
+			"12:40",
+			"15:15",
+			"16:15",
+			"18:00",
+			"19:15",
+			"20:45"]
+		},
+		{
+			"title": "Show Dogs",
+			"times": ["10:00"]
+		},
+		{
+			"title": "Ant-Man & The Wasp",
+			"times": ["12:00",
+			"14:50",
+			"16:40",
+			"17:40",
+			"19:30",
+			"20:30"]
+		},
+		{
+			"title": "Hotel Transylvania 3",
+			"times": ["10:20",
+			"11:50",
+			"14:20",
+			"16:50"]
+		},
+		{
+			"title": "Teen Titans Go! To The Movies",
+			"times": ["10:00",
+			"12:15",
+			"14:30"]
+		},
+		{
+			"title": "Mission: Impossible - Fallout",
+			"times": ["13:40",
+			"17:00",
+			"19:00",
+			"20:20"]
+		}]
+	}]
+}
+            </pre>
+
+        </div>
+
+    </div>
 
 </div>
 
