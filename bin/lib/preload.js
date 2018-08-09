@@ -21,7 +21,7 @@ module.exports = function(){
 
 						if(data.cinemas){
 							data.cinemas.forEach(cinema => {
-								fetch(`${process.env.HOSTNAME}/get/times/cinema/${cinema.id}`)
+								fetch(`http://localhost:${process.env.PORT}/get/times/cinema/${cinema.id}`)
 							});
 						}
 
