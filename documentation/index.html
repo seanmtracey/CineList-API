@@ -11,8 +11,8 @@
 
 <meta property="og:title" content="CineList" />
 <meta property="og:description" content="Cinema websites are rubbish. CineList makes it easy to get local cinema showtimes across the UK." />
-<meta property="og:url" content="http://cinelist.co.uk/" />
-<meta property="og:image" content="http://cinelist.co.uk/icons/fb.png" />
+<meta property="og:url" content="https://cinelist.co.uk/" />
+<meta property="og:image" content="https://cinelist.co.uk/icons/fb.png" />
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -37,7 +37,7 @@
 			<p>Get a list of cinemas within a certain distance of a UK postcode</p>
 
 			<pre class="result">
-// Request: http://api.cinelist.co.uk/search/cinemas/postcode/LU12HN
+// Request: https://api.cinelist.co.uk/search/cinemas/postcode/LU12HN
 
 // Result :
 {
@@ -83,9 +83,9 @@
 			<p>Get a list of cinemas by searching for a UK city, town or placename</p>
 
 			<pre class="result">
-// Request: http://api.cinelist.co.uk/search/cinemas/location/St.%20Albans
+// Request: https://api.cinelist.co.uk/search/cinemas/location/St.%20Albans
 
-// Result: 
+// Result : 
 {
    "status":"ok",
    "postcode":"AL12JF",
@@ -157,10 +157,9 @@
 			<p>Get a list of cinemas within a radius of a set of geo coordinates</p>
 			
 			<pre class="result">
-// Request: http://api.cinelist.co.uk/search/cinemas/coordinates/50.7200/-1.8800
+// Request: https://api.cinelist.co.uk/search/cinemas/coordinates/50.7200/-1.8800
 
 // Result : 
-
 {
    "status":"ok",
    "postcode":"BH26EG",
@@ -231,7 +230,7 @@
             <p>Get the film times for a cinema. The day query parameter is an offset to get times for a day other than today.</p>
 
             <pre class="result">
-// Request: http://api.cinelist.co.uk/get/times/cinema/7530
+// Request: https://api.cinelist.co.uk/get/times/cinema/7530
 
 // Result : 
 {
@@ -418,9 +417,9 @@
             <p>Get the film times for the provided list of cinemas. The list of cinemas should be separated by commas. The day query parameter is an offset to get times for a day other than today.</p>
 
             <pre class="result">
-// Request: http://api.cinelist.co.uk/get/times/many/10681,7517
+// Request: https://api.cinelist.co.uk/get/times/many/10681,7517
 
-//Result:
+// Result :
 {
 	"status": "ok",
 	"results": [{

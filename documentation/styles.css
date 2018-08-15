@@ -84,16 +84,16 @@ input{
 }
 
 .ep span.method{
-	font-size: 12px;
-	background-color: white;
-	color: #989898;
-	padding: 3px 5px 2px;
-	border-radius: 3px;
-	font-weight: 100;
-	margin-right: 5px;
-	position: relative;
-	top: -1px;
-	border: solid 1px #989898;
+    font-size: 12px;
+    background-color: white;
+    color: #000000;
+    padding: 3px 5px 2px;
+    border-radius: 3px;
+    font-weight: 600;
+    margin-right: 5px;
+    position: relative;
+    top: -1px;
+    border: solid 1px #000000;
 }
 
 .ep span.path{
