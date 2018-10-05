@@ -17,6 +17,47 @@ const cache = LRU({
 
 const fafAPI = "http://www.findanyfilm.com"
 
+function getCinemaByID(id)
+{
+  const fafURL = `${fafAPI}/api/screenings/by_venue_id/venue_id/${id}`;
+  if(id === undefined || id === "" || id === "0")
+  {
+    debug("getCinemaData: Request was rejected",id);
+    return Promise.reject("A cinema ID was not passed to the function");
+  }
+
+  const cachedVersion = cache.get(`cinema:${id}`);
+  debug(`Is there cached cinema with ID ${id}?`, cachedVersion !== undefined);
+
+  if(cachedVersion)
+  {
+    const parsedCacheVersion = JSON.parse(cachedVersion);
+    debug(`Returning cached cinema data for ID ${id}`,parsedCacheVersion);
+    return Promise.resolve(parsedCacheVersion);
+  }
+  else
+  {
+    return fetch(fafURL)
+    .then(res => {
+      return res.json();
+    })
+    .then(json =>{
+      delete json[id].films;
+      const cinema = json[id];
+      cache.set(`cinema:${id}`, JSON.stringify({
+        state: 'resolved',
+        cinema
+      }));
+
+      return cinema;
+    })
+    .catch(err => {
+      debug("An error occurred while fetching cinema data"),err;;
+      throw "An error occurred while fetching cinema data, the cinema may not exist";
+    });
+  }
+}
+
 function getCinemasForPostcode(postcode, attempt){
 	
 	attempt = attempt || 0;
@@ -194,5 +235,6 @@ function getListingForCinemaByID(id, day){
 
 module.exports = {
 	getCinemas : getCinemasForPostcode,
-	getListings : getListingForCinemaByID
+	getListings : getListingForCinemaByID,
+  getCinema : getCinemaByID
 };
