@@ -7,7 +7,7 @@ module.exports = function(){
 
 	if(process.env.PORT && process.env.PRELOAD){
 
-		const delay = 1800;
+		const delay = process.env.PRELOAD_DELAY || 1800;
 
 		places.forEach( (place, idx) => {
 
