@@ -5,6 +5,7 @@ const router = express.Router();
 const debug = require('debug')('api:routes:check');
 
 const locationInterface = require('../bin/lib/locationInterface');
+const faf = require('../bin/lib/fafScraper');
 
 router.get('/isPostcode/:postcode', function(req, res){
 
@@ -32,6 +33,20 @@ router.get('/isPostcode/:postcode', function(req, res){
 		})
 	;
 	
+});
+
+router.get('/isUp', function (req,res){
+    faf.isUp()
+        .then(retVal => {
+            res.json({
+                "fafSite": retVal
+            });
+        })
+        .catch(err => {
+            res.json({
+                "fafSite": false
+            })
+        });
 });
 
 module.exports = router;

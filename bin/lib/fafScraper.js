@@ -17,6 +17,22 @@ const cache = LRU({
 
 const fafAPI = "http://www.findanyfilm.com"
 
+function isUp()
+{
+    return fetch(fafAPI)
+        .then(res => {
+            switch(res.status)
+            {
+                case 200: return true;
+                default: return false;
+            }
+        })
+        .catch(err => {
+            debug("Experienced an error",err);
+            return false;
+        });
+}
+
 function getCinemaByID(id)
 {
   const fafURL = `${fafAPI}/api/screenings/by_venue_id/venue_id/${id}`;
@@ -236,5 +252,6 @@ function getListingForCinemaByID(id, day){
 module.exports = {
 	getCinemas : getCinemasForPostcode,
 	getListings : getListingForCinemaByID,
-  getCinema : getCinemaByID
+    getCinema : getCinemaByID,
+    isUp: isUp
 };
