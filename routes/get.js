@@ -68,19 +68,20 @@ router.get('/times/many/:venueIDs', function(req, res){
 });
 
 router.get('/cinema/:venueID',function(req,res){
-  const venueID = req.params.venueID;
-  return FaF.getCinema(venueID)
-    .then(cinemaData => {
-      return res.json(cinemaData);
-    })
-    .catch(err => {
-      debug("An error occurred",err);
-      res.status(500);
-      return res.json({
-        status: "ERR",
-        reason: err
-      });
-    });
+	const venueID = req.params.venueID;
+  	return FaF.getCinema(venueID)
+    		.then(cinemaData => {
+      			return res.json(cinemaData);
+    		})
+    		.catch(err => {
+      			debug("An error occurred",err);
+      			res.status(500);
+      			res.json({
+        			status: "ERR",
+        			reason: err
+      			});
+    		})
+	;
 });
 
 module.exports = router;
