@@ -551,3 +551,23 @@ Get the film times for the provided list of cinemas. The list of cinemas should 
 	}]
 }
 ```
+
+**GET** `/get/cinema/:venueID`
+Get information for a cinema with a given Cinema ID.
+
+```
+// Request: http://api.cinelist.co.uk/get/cinema/7530
+{
+   "cinema":{
+      "name":"Cineworld Luton",
+      "address1":"The Galaxy, <br /> Bridge Street, <br /> Luton",
+      "towncity":"Luton",
+      "show_towncity":false,
+      "postcode":"LU1 2NB",
+      "website":"http://www1.cineworld.co.uk/cinemas/luton",
+      "phone":"0871 200 2000",
+      "distance":"-1",
+      "lat":"51.874760",
+      "lon":"-0.423730"
+   }
+}
