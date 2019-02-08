@@ -1,6 +1,6 @@
 {
   "name": "cinelist-api",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "The scraper and interface for the CineList app",
   "main": "app.js",
   "scripts": {
