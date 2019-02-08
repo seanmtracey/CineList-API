@@ -52,7 +52,7 @@ function getCinemaByID(id)
       return cinema;
     })
     .catch(err => {
-      debug("An error occurred while fetching cinema data"),err;;
+      debug("An error occurred while fetching cinema data", err);
       throw "An error occurred while fetching cinema data, the cinema may not exist";
     });
   }
