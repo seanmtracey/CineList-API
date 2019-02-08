@@ -7,7 +7,7 @@ module.exports = function(){
 
 	if(process.env.PORT && process.env.PRELOAD){
 
-		const delay = 1800;
+		const delay = process.env.PRELOAD_DELAY || 1800;
 
 		places.forEach( (place, idx) => {
 
@@ -21,7 +21,7 @@ module.exports = function(){
 
 						if(data.cinemas){
 							data.cinemas.forEach(cinema => {
-								fetch(`${process.env.HOSTNAME}/get/times/cinema/${cinema.id}`)
+								fetch(`http://localhost:${process.env.PORT}/get/times/cinema/${cinema.id}`)
 							});
 						}
 

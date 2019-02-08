@@ -4,8 +4,8 @@ module.exports = () => {
 
 	const rightNow = moment();
 	const midnight = rightNow.clone().endOf('day');
-	const millisecondsLeftInDay = rightNow.diff(midnight, 'milliseconds');
+	const millisecondsLeftInDay = midnight.diff(rightNow, 'milliseconds');
 
-	return -millisecondsLeftInDay
+	return millisecondsLeftInDay
 
 };

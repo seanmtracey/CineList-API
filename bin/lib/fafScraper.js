@@ -11,8 +11,7 @@ const offsetToDatestamp = require('./day-offset-to-datestamp');
 const halflife = require('./half-life');
 
 const cache = LRU({
-	length: function (n, key) { return n * 2 + key.length },
-	maxAge: halflife()
+	length: function (n, key) { return n * 2 + key.length }
 });
 
 const fafAPI = "http://www.findanyfilm.com"
@@ -120,7 +119,7 @@ function getCinemasForPostcode(postcode, attempt){
 				cache.set(`cinemaLocations:${postcode}`, JSON.stringify({
 					state : 'resolved',
 					cinemas
-				}));
+				}), halflife());
 				
 				return cinemas;
 				
@@ -174,7 +173,7 @@ function getListingForCinemaByID(id, day){
 		cache.set(`${id}:${day}`, JSON.stringify({
 			state : 'unresolved',
 			maxAge : 1000 * 10
-		}));
+		}), halflife());
 	}
 
 	const fafURL = `${fafAPI}/api/screenings/by_venue_id/venue_id/${id}/date_from/${offsetToDatestamp( day )}`;
@@ -192,7 +191,7 @@ function getListingForCinemaByID(id, day){
 				cache.set(`listings:${id}:${day}`, JSON.stringify({
 					state : 'invalid',
 					maxAge : (1000 * 60 * 60) * 72
-				}));
+				}), halflife());
 
 				throw "Not a valid cinema ID";
 			}
@@ -224,7 +223,7 @@ function getListingForCinemaByID(id, day){
 				listings
 			};
 
-			cache.set(`listings:${id}:${day}`, JSON.stringify( listingsToCache ) );
+			cache.set(`listings:${id}:${day}`, JSON.stringify( listingsToCache ), halflife() );
 
 			return listings;
 
