@@ -6,6 +6,6 @@ module.exports = () => {
 	const midnight = rightNow.clone().endOf('day');
 	const millisecondsLeftInDay = midnight.diff(rightNow, 'milliseconds');
 
-	return millisecondsLeftInDay
+	return millisecondsLeftInDay;
 
 };

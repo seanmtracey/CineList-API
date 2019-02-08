@@ -3,12 +3,13 @@ const fetch = require('node-fetch');
 const debug = require('debug')('api:lib:locationInterface');
 const LRU = require("lru-cache");
 
-const halflife = require('./half-life');
+const shelfLife = require('./shelf-life');
 
 const postCodeAPI = 'http://api.postcodes.io/postcodes';
 const nominatimAPI = 'http://nominatim.openstreetmap.org';
 const cache = LRU({
-	length: function (n, key) { return n * 2 + key.length }
+	length: function (n, key) { return n * 2 + key.length },
+	max : process.env.LRU_MAX || 0
 });
 
 function validatePostcode (postcode){
@@ -43,7 +44,7 @@ function validatePostcode (postcode){
 					cache.set(`validate-postcode:${postcode}`, JSON.stringify({
 						state : 'resolved',
 						data : data.result
-					}), halflife());
+					}), shelfLife());
 
 					return data.result;
 				} else {
@@ -119,7 +120,7 @@ function searchForLocation (location){
 						cache.set(`nominatim-search:${location}`, JSON.stringify({
 							state : 'resolved',
 							data
-						}), halflife());
+						}), shelfLife());
 
 						return data;
 
