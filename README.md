@@ -553,10 +553,10 @@ Get the film times for the provided list of cinemas. The list of cinemas should 
 ```
 
 **GET** `/get/cinema/:venueID`
-Get information for a cinema with a given Cinema ID.
+Get information for a cinema with a given id.
 
 ```
-// Request: http://api.cinelist.co.uk/get/cinema/7530
+// Request: https://api.cinelist.co.uk/get/cinema/7530
 {
    "cinema":{
       "name":"Cineworld Luton",
