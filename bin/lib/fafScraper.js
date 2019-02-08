@@ -26,7 +26,7 @@ function getCinemaByID(id)
     return Promise.reject("A cinema ID was not passed to the function");
   }
 
-  const cachedVersion = cache.get(`cinema:${id}`);
+  const cachedVersion = cache.get(`cinemaInfo:${id}`);
   debug(`Is there cached cinema with ID ${id}?`, cachedVersion !== undefined);
 
   if(cachedVersion)
@@ -44,7 +44,7 @@ function getCinemaByID(id)
     .then(json =>{
       delete json[id].films;
       const cinema = json[id];
-      cache.set(`cinema:${id}`, JSON.stringify({
+      cache.set(`cinemaInfo:${id}`, JSON.stringify({
         state: 'resolved',
         cinema
       }));
