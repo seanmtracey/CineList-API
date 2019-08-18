@@ -11,7 +11,8 @@ const offsetToDatestamp = require('./day-offset-to-datestamp');
 const shelfLife = require('./shelf-life');
 
 const cache = LRU({
-	length: function (n, key) { return n * 2 + key.length }
+	length: function (n, key) { return n * 2 + key.length },
+	max : Number(process.env.LRU_MAX) || 0
 });
 
 const fafAPI = "http://www.findanyfilm.com"
