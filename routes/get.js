@@ -4,7 +4,6 @@ const express = require('express');
 const router = express.Router();
 const debug = require('debug')('api:routes:get');
 
-const locationInterface = require('../bin/lib/locationInterface');
 const FaF = require('../bin/lib/fafScraper');
 
 router.get('/times/cinema/:venueID', function(req, res){
