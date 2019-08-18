@@ -37,9 +37,9 @@ router.get('/times/cinema/:venueID', function(req, res){
 
 router.get('/times/many/:venueIDs', function(req, res){
 
-	const venueIDs = req.params.venueIDs.split(',');
+	const venueIDs = Array.from( new Set( req.params.venueIDs.split(',') ) );
 	const dayOffset = req.query.day;
-
+	
 	const times = venueIDs.map(venueID => {
 
 		return FaF.getListings(venueID, dayOffset)
