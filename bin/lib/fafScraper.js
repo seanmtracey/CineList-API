@@ -19,7 +19,7 @@ const fafAPI = "http://www.findanyfilm.com"
 function getCinemaByID(id){
 	const fafURL = `${fafAPI}/api/screenings/by_venue_id/venue_id/${id}`;
 	if(id === undefined || id === "" || id === "0"){
-		debug("getCinemaData: Request was rejected",id);
+		debug("getCinemaData: Request was rejected due to improper entry", id);
 		return Promise.reject("A cinema ID was not passed to the function");
 	}
 
@@ -60,7 +60,7 @@ function getCinemasForPostcode(postcode, attempt){
 	const fafURL = `${fafAPI}/find-cinema-tickets?townpostcode=${postcode}`;
 	
 	if(postcode === undefined || postcode === "" || postcode === null){
-		debug("getCinemasForPostcode: Request was rejected", postcode);
+		debug("getCinemasForPostcode: Request was rejected due to improper entry", postcode);
 		return Promise.reject("A postcode was not passed to the function");
 	}
 
@@ -87,9 +87,13 @@ function getCinemasForPostcode(postcode, attempt){
 				
 				const cinemaList = Array.from(parsedHTML('ul.cinemas-listings li.cinemaResult'));
 
-				if(cinemaList.length === 0 && attempt < 2){ 
-					debug("There were no cinemas for that postcode. Retrying with truncated postcode");
-					return getCinemasForPostcode(postcode.split(' ')[0], attempt += 1);
+				if(cinemaList.length === 0 && attempt < 2){
+
+					const truncatedPostcode = postcode.split(' ')[0];
+
+					debug(`There were no cinemas for postcode ${postcode}. Retrying with truncated postcode ${truncatedPostcode}`);
+					
+					return getCinemasForPostcode(truncatedPostcode, attempt += 1);
 				}
 
 				const cinemas = cinemaList.map(cinema => {
@@ -129,8 +133,8 @@ function getCinemasForPostcode(postcode, attempt){
 function getListingForCinemaByID(id, day){
 	
 	if(id === undefined || id === "" || id === null){
-		debug("getListingForCinemaByID: Request was rejected", id);
-		return Promise.reject("A cinema id was not passed");
+		debug("getListingForCinemaByID: Request was rejected due to improper entry", id);
+		return Promise.reject("A cinema ID was not passed");
 	}
 	
 	day = day || 0;
@@ -146,13 +150,13 @@ function getListingForCinemaByID(id, day){
 		debug(parsedCacheVersion);
 
 		if(parsedCacheVersion.state === "invalid"){
-			debug("INVALID cinema ID. Rejecting...");
-			return Promise.reject("Not a valid cinema ID");
+			debug(`INVALID cinema ID ${id}. Rejecting...`);
+			return Promise.reject(`Cinema ID ${id} is not a valid cinema ID`);
 		} else if(parsedCacheVersion.state === 'unresolved'){
 			debug("Item is in cache, but unresolved... waiting...");
 			return new Promise(function(resolve){
 				setTimeout(function(){
-					console.log("Wait time elapsed");
+					debug(`Wait time elapsed for cached version of cinema with ID ${id} has elapsed`);
 					resolve();
 				}, 3000);
 			}).then(function(){
@@ -160,7 +164,7 @@ function getListingForCinemaByID(id, day){
 			});
 		
 		} else if( today.startOf('day').isSame(cacheTime.startOf('day')) ){
-			debug("Using cached version");
+			debug(`Using cached results for cinema ID ${id}`);
 			debug(parsedCacheVersion.listings);
 			return Promise.resolve(parsedCacheVersion.listings);
 		}
@@ -231,5 +235,5 @@ function getListingForCinemaByID(id, day){
 module.exports = {
 	getCinemas : getCinemasForPostcode,
 	getListings : getListingForCinemaByID,
-  getCinema : getCinemaByID
+	getCinema : getCinemaByID
 };

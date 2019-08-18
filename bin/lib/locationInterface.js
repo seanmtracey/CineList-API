@@ -61,7 +61,7 @@ function validatePostcode (postcode){
 function getPostCodeForCoordinates (latitude, longitude){
 	
 	if(latitude === undefined || latitude === "" || latitude === null || longitude === undefined || longitude === "" || longitude === null){
-		debug("getPostCodeForCoordinates: Request was rejected", latitude, longitude);
+		debug("getPostCodeForCoordinates: Request was rejected due to either a missing latitude or longitude value", latitude, longitude);
 		return Promise.reject("Either a latitude or longitude value was omitted. Both are required");
 	}
 	
@@ -71,7 +71,7 @@ function getPostCodeForCoordinates (latitude, longitude){
 
 	const lookupQuery = `${postCodeAPI}/?lon=${lon}&lat=${lat}`;
 
-	debug(lookupQuery);
+	debug(`Making Postcode API request ${lookupQuery}`);
 
 	return fetch(lookupQuery)
 		.then(res => res.json())
@@ -92,7 +92,7 @@ function getPostCodeForCoordinates (latitude, longitude){
 function searchForLocation (location){
 	
 	if(location === undefined || location === "" || location === null){
-		debug("searchForLocation: Request was rejected", location);
+		debug("searchForLocation: Request was rejected due to improper input", location);
 		return Promise.reject("A location was not passed to the function");
 	}
 	
