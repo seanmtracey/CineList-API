@@ -9,7 +9,7 @@ const postCodeAPI = 'http://api.postcodes.io/postcodes';
 const nominatimAPI = 'http://nominatim.openstreetmap.org';
 const cache = LRU({
 	length: function (n, key) { return n * 2 + key.length },
-	max : process.env.LRU_MAX || 0
+	max : Number(process.env.LRU_MAX) || 0
 });
 
 function validatePostcode (postcode){
@@ -96,6 +96,8 @@ function searchForLocation (location){
 		return Promise.reject("A location was not passed to the function");
 	}
 	
+	location = location.toLowerCase();
+
 	const nominatimQuery = `${nominatimAPI}/search?q=${location}&countrycodes=gb&format=json&limit=10`;
 
 	const cachedVersion = cache.get(`nominatim-search:${location}`);

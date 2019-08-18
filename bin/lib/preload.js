@@ -12,7 +12,7 @@ module.exports = function(){
 		places.forEach( (place, idx) => {
 
 			setTimeout(function(){
-				debug(`Caching results for ${place}`);
+				debug(`Getting results to cache for ${place}`);
 				fetch(`http://localhost:${process.env.PORT}/search/cinemas/location/${place}`)
 					.then(res => res.json())
 					.then(data => {
